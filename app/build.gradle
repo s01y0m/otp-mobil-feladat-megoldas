@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+    id 'groovy'
+    id 'application'
+    id 'io.freefair.lombok' version '8.10'
+    id 'com.gradleup.shadow' version '8.3.0'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.commons:commons-csv:1.11.0'
+    implementation 'org.apache.commons:commons-lang3:3.16.0'
+    implementation 'org.slf4j:slf4j-api:2.0.16'
+    implementation 'ch.qos.logback:logback-classic:1.5.7'
+    testImplementation 'org.apache.groovy:groovy-all:4.0.22'
+
+}
+
+testing {
+    suites {
+        test {
+            useSpock('2.3-groovy-4.0')
+        }
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+        sourceCompatibility = JavaLanguageVersion.of(21)
+        targetCompatibility = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = 'hu.otp.mobil.App'
+}
+
+shadowJar {
+    archiveBaseName.set('solution')
+    archiveClassifier.set('')
+}
+
+
